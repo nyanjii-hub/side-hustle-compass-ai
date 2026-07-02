@@ -1,6 +1,6 @@
 // app/result/page.tsx
 "use client";
-import { useEffect, useState } from "react";
+import { useState } from "react";
 import type { DiagnosisResult } from "@/lib/types";
 import { TodayAction } from "@/components/result/TodayAction";
 import { TraitTags } from "@/components/result/TraitTags";
@@ -10,12 +10,11 @@ import { SideHustleRank } from "@/components/result/SideHustleRank";
 import { Roadmap } from "@/components/result/Roadmap";
 
 export default function ResultPage() {
-  const [result, setResult] = useState<DiagnosisResult | null>(null);
-
-  useEffect(() => {
+  const [result] = useState<DiagnosisResult | null>(() => {
+    if (typeof window === "undefined") return null;
     const stored = localStorage.getItem("diagnosis_result");
-    if (stored) setResult(JSON.parse(stored));
-  }, []);
+    return stored ? (JSON.parse(stored) as DiagnosisResult) : null;
+  });
 
   if (!result) {
     return (

@@ -16,6 +16,7 @@ const TAG_LABELS: Record<string, string> = {
 export function rankSideHustles(
   profile: UserProfile,
   primaryType: WorkStyleTypeId,
+  // eslint-disable-next-line @typescript-eslint/no-unused-vars
   _typeScores: TypeScores
 ): RankedSideHustle[] {
   return sideHustles
@@ -43,5 +44,5 @@ export function getNotRecommended(ranked: RankedSideHustle[]): SideHustle[] {
   return [...ranked]
     .sort((a, b) => a.score - b.score)
     .slice(0, 2)
-    .map(({ score: _s, matchReason: _r, ...sh }) => sh as SideHustle);
+    .map(sh => sh as SideHustle);
 }
