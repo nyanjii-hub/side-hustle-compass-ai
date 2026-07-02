@@ -1,65 +1,78 @@
-import Image from "next/image";
+// app/page.tsx
+import Link from "next/link";
 
 export default function Home() {
   return (
-    <div className="flex flex-col flex-1 items-center justify-center bg-zinc-50 font-sans dark:bg-black">
-      <main className="flex flex-1 w-full max-w-3xl flex-col items-center justify-between py-32 px-16 bg-white dark:bg-black sm:items-start">
-        <Image
-          className="dark:invert"
-          src="/next.svg"
-          alt="Next.js logo"
-          width={100}
-          height={20}
-          priority
-        />
-        <div className="flex flex-col items-center gap-6 text-center sm:items-start sm:text-left">
-          <h1 className="max-w-xs text-3xl font-semibold leading-10 tracking-tight text-black dark:text-zinc-50">
-            To get started, edit the page.tsx file.
-          </h1>
-          <p className="max-w-md text-lg leading-8 text-zinc-600 dark:text-zinc-400">
-            Looking for a starting point or more instructions? Head over to{" "}
-            <a
-              href="https://vercel.com/templates?framework=next.js&utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Templates
-            </a>{" "}
-            or the{" "}
-            <a
-              href="https://nextjs.org/learn?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-              className="font-medium text-zinc-950 dark:text-zinc-50"
-            >
-              Learning
-            </a>{" "}
-            center.
-          </p>
+    <main className="min-h-screen bg-white">
+      {/* Hero */}
+      <section className="px-6 py-16 text-center max-w-lg mx-auto">
+        <p className="text-xs font-semibold text-zinc-400 mb-4 tracking-widest uppercase">
+          副業コンパスAI
+        </p>
+        <h1 className="text-3xl font-bold text-zinc-900 leading-tight mb-4">
+          副業を当てるより、<br />
+          あなた自身を知ることから。
+        </h1>
+        <p className="text-zinc-500 leading-relaxed mb-8">
+          自分でも気づいていない強みをAIが言語化します。<br />
+          10問・5分で、今日の一歩へ。
+        </p>
+        <Link
+          href="/diagnosis"
+          className="inline-block bg-zinc-900 text-white px-10 py-4 rounded-full text-base font-semibold hover:bg-zinc-700 transition-colors"
+        >
+          無料で診断をはじめる
+        </Link>
+        <p className="text-xs text-zinc-400 mt-3">登録不要・無料・5分で完了</p>
+      </section>
+
+      {/* Pain points */}
+      <section className="px-6 pb-8 max-w-lg mx-auto">
+        <p className="text-xs font-semibold text-zinc-400 mb-3">こんな方におすすめ</p>
+        <ul className="space-y-3">
+          {[
+            "副業したいけど何から始めればいいかわからない",
+            "自分に向いている副業が知りたい",
+            "営業なしで在宅でできる副業を探している",
+            "まず月3〜5万円から副業を始めたい",
+          ].map(text => (
+            <li key={text} className="flex items-start gap-2 text-sm text-zinc-700">
+              <span className="text-emerald-500 mt-0.5 shrink-0">✓</span>
+              <span>{text}</span>
+            </li>
+          ))}
+        </ul>
+      </section>
+
+      {/* 3 steps */}
+      <section className="mx-4 mb-8 px-6 py-8 bg-zinc-50 rounded-2xl max-w-lg lg:mx-auto">
+        <p className="text-xs font-semibold text-zinc-400 mb-6 text-center">3ステップで結果が出る</p>
+        <div className="space-y-5">
+          {[
+            { step: "01", title: "12問に答える（5分）", desc: "過去の行動や得意なことを選ぶだけ" },
+            { step: "02", title: "あなたの強みを言語化", desc: "自分でも気づいていない特徴をAIが言葉にする" },
+            { step: "03", title: "向いている副業と一歩を提示", desc: "今日やることと7日間ロードマップまで提示" },
+          ].map(item => (
+            <div key={item.step} className="flex gap-4 items-start">
+              <span className="text-2xl font-bold text-zinc-200 w-10 shrink-0">{item.step}</span>
+              <div>
+                <p className="font-semibold text-zinc-800 text-sm">{item.title}</p>
+                <p className="text-xs text-zinc-500 mt-0.5">{item.desc}</p>
+              </div>
+            </div>
+          ))}
         </div>
-        <div className="flex flex-col gap-4 text-base font-medium sm:flex-row">
-          <a
-            className="flex h-12 w-full items-center justify-center gap-2 rounded-full bg-foreground px-5 text-background transition-colors hover:bg-[#383838] dark:hover:bg-[#ccc] md:w-[158px]"
-            href="https://vercel.com/new?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            <Image
-              className="dark:invert"
-              src="/vercel.svg"
-              alt="Vercel logomark"
-              width={16}
-              height={16}
-            />
-            Deploy Now
-          </a>
-          <a
-            className="flex h-12 w-full items-center justify-center rounded-full border border-solid border-black/[.08] px-5 transition-colors hover:border-transparent hover:bg-black/[.04] dark:border-white/[.145] dark:hover:bg-[#1a1a1a] md:w-[158px]"
-            href="https://nextjs.org/docs?utm_source=create-next-app&utm_medium=appdir-template-tw&utm_campaign=create-next-app"
-            target="_blank"
-            rel="noopener noreferrer"
-          >
-            Documentation
-          </a>
-        </div>
-      </main>
-    </div>
+      </section>
+
+      {/* Second CTA */}
+      <section className="px-6 pb-16 text-center">
+        <Link
+          href="/diagnosis"
+          className="inline-block bg-zinc-900 text-white px-10 py-4 rounded-full text-base font-semibold hover:bg-zinc-700 transition-colors"
+        >
+          無料で診断をはじめる
+        </Link>
+      </section>
+    </main>
   );
 }
