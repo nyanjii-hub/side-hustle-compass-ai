@@ -68,6 +68,10 @@ export interface SideHustle {
   whyGood: string;
   todayAction: string;
   weekRoadmap: [string, string, string, string, string, string, string];
+  beginnerFriendly: "easy" | "medium" | "hard";
+  timeToRevenue: string;
+  ongoingBurden: "low" | "medium" | "high";
+  aiCompatibility: "low" | "medium" | "high";
 }
 
 export interface RankedSideHustle extends SideHustle {
@@ -89,6 +93,7 @@ export interface DiagnosisResult {
   notSuitedTypeDetail: WorkStyleType;
   rankedSideHustles: RankedSideHustle[];
   notRecommended: SideHustle[];
+  notRecommendedReason: string;
   todayAction: string;
   weekRoadmap: string[];
 }

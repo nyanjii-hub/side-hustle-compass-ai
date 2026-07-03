@@ -2,12 +2,14 @@
 "use client";
 import { useState } from "react";
 import type { DiagnosisResult } from "@/lib/types";
+import { TypeHeader } from "@/components/result/TypeHeader";
 import { TodayAction } from "@/components/result/TodayAction";
 import { TraitTags } from "@/components/result/TraitTags";
 import { StrengthText } from "@/components/result/StrengthText";
 import { WorkStyleCard } from "@/components/result/WorkStyleCard";
 import { SideHustleRank } from "@/components/result/SideHustleRank";
 import { Roadmap } from "@/components/result/Roadmap";
+import { ClosingMessage } from "@/components/result/ClosingMessage";
 
 export default function ResultPage() {
   const [result] = useState<DiagnosisResult | null>(() => {
@@ -34,23 +36,38 @@ export default function ResultPage() {
   return (
     <main className="min-h-screen bg-zinc-50">
       <div className="max-w-2xl mx-auto px-4 py-8 space-y-6">
-        <h1 className="text-xl font-bold text-zinc-800 text-center">
-          診断が完了しました
-        </h1>
+        {/* ① タイプ表示（最初に見せる） */}
+        <TypeHeader primaryTypeDetail={result.primaryTypeDetail} />
 
+        {/* ② 今日やること */}
         <TodayAction action={result.todayAction} />
+
+        {/* ③ 行動特性 */}
         <TraitTags labels={result.traitLabels} />
+
+        {/* ④ 無意識にできていること */}
         <StrengthText text={result.strengthText} />
+
+        {/* ⑤ 働き方タイプ詳細 */}
         <WorkStyleCard
           primary={result.primaryTypeDetail}
           notSuited={result.notSuitedTypeDetail}
         />
+
+        {/* ⑥ 副業ランキング */}
         <SideHustleRank
           ranked={result.rankedSideHustles}
           notRecommended={result.notRecommended}
+          notRecommendedReason={result.notRecommendedReason}
         />
+
+        {/* ⑦ ロードマップ */}
         <Roadmap days={result.weekRoadmap} />
 
+        {/* ⑧ クロージングメッセージ */}
+        <ClosingMessage />
+
+        {/* アクションボタン */}
         <div className="flex flex-col gap-3 pt-4 pb-8">
           <a
             href={`https://twitter.com/intent/tweet?text=${shareText}`}
