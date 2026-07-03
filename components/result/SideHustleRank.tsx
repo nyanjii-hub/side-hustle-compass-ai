@@ -1,5 +1,7 @@
 // components/result/SideHustleRank.tsx
 import type { RankedSideHustle, SideHustle } from "@/lib/types";
+import { glossary, SIDE_HUSTLE_TERM_MAP } from "@/data/glossary";
+import { GlossaryTip } from "@/components/ui/GlossaryTip";
 
 interface Props {
   ranked: RankedSideHustle[];
@@ -13,16 +15,30 @@ export function SideHustleRank({ ranked, notRecommended }: Props) {
     <section>
       <h2 className="text-base font-bold text-zinc-800 mb-3">おすすめ副業ランキング</h2>
       <div className="space-y-3 mb-6">
-        {ranked.slice(0, 5).map((sh, i) => (
-          <div key={sh.id} className="bg-white rounded-xl p-4 border border-zinc-100">
-            <div className="flex items-center gap-2 mb-1">
-              <span className="text-sm">{RANK_ICONS[i]}</span>
-              <span className="font-semibold text-zinc-800 text-sm">{sh.name}</span>
+        {ranked.slice(0, 5).map((sh, i) => {
+          const termIds = SIDE_HUSTLE_TERM_MAP[sh.id] ?? [];
+          const terms = termIds
+            .map(id => glossary.find(t => t.id === id))
+            .filter(t => t !== undefined);
+
+          return (
+            <div key={sh.id} className="bg-white rounded-xl p-4 border border-zinc-100">
+              <div className="flex items-center gap-2 mb-1">
+                <span className="text-sm">{RANK_ICONS[i]}</span>
+                <span className="font-semibold text-zinc-800 text-sm">{sh.name}</span>
+              </div>
+              <p className="text-xs text-zinc-500 mb-1">{sh.matchReason}</p>
+              <p className="text-xs text-zinc-400">月収目安（6ヶ月後）: {sh.income6months}</p>
+              {terms.length > 0 && (
+                <div className="flex flex-wrap gap-1.5 mt-2.5 pt-2.5 border-t border-zinc-50">
+                  {terms.map(term => (
+                    <GlossaryTip key={term.id} term={term} />
+                  ))}
+                </div>
+              )}
             </div>
-            <p className="text-xs text-zinc-500 mb-1">{sh.matchReason}</p>
-            <p className="text-xs text-zinc-400">月収目安（6ヶ月後）: {sh.income6months}</p>
-          </div>
-        ))}
+          );
+        })}
       </div>
 
       <h3 className="text-sm font-semibold text-zinc-500 mb-2">おすすめしない副業</h3>
