@@ -15,7 +15,7 @@ export default function Home() {
         </h1>
         <p className="text-zinc-500 leading-relaxed mb-8">
           自分でも気づいていない強みをAIが言語化します。<br />
-          10問・5分で、今日の一歩へ。
+          12問・5分で、今日の一歩へ。
         </p>
         <Link
           href="/diagnosis"

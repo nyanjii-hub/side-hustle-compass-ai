@@ -53,6 +53,16 @@ export interface WorkStyleType {
   notSuited: string;
 }
 
+export interface TenMinuteMission {
+  title: string;
+  steps: string[];
+}
+
+export interface StumblingPoint {
+  worry: string;
+  solution: string;
+}
+
 export interface SideHustle {
   id: string;
   name: string;
@@ -72,6 +82,10 @@ export interface SideHustle {
   timeToRevenue: string;
   ongoingBurden: "low" | "medium" | "high";
   aiCompatibility: "low" | "medium" | "high";
+  incomeMilestones: [string, string, string];
+  tenMinuteMission: TenMinuteMission;
+  stumblingPoints: [StumblingPoint, StumblingPoint];
+  aiPrompt: string;
 }
 
 export interface RankedSideHustle extends SideHustle {

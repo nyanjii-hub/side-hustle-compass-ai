@@ -10,6 +10,9 @@ import { WorkStyleCard } from "@/components/result/WorkStyleCard";
 import { SideHustleRank } from "@/components/result/SideHustleRank";
 import { Roadmap } from "@/components/result/Roadmap";
 import { ClosingMessage } from "@/components/result/ClosingMessage";
+import { TenMinuteMission } from "@/components/result/TenMinuteMission";
+import { StumblingPoints } from "@/components/result/StumblingPoints";
+import { AiPromptCard } from "@/components/result/AiPromptCard";
 
 export default function ResultPage() {
   const [result] = useState<DiagnosisResult | null>(() => {
@@ -29,6 +32,8 @@ export default function ResultPage() {
     );
   }
 
+  const topSideHustle = result.rankedSideHustles[0];
+
   const shareText = encodeURIComponent(
     `副業コンパスAIで診断した結果、私は「${result.primaryTypeDetail.name}」タイプでした！ #副業コンパスAI`
   );
@@ -39,36 +44,57 @@ export default function ResultPage() {
         {/* ① タイプ表示（最初に見せる） */}
         <TypeHeader primaryTypeDetail={result.primaryTypeDetail} />
 
-        {/* ② 今日やること */}
+        {/* ② 今日の10分ミッション（最優先） */}
+        {topSideHustle && (
+          <TenMinuteMission mission={topSideHustle.tenMinuteMission} />
+        )}
+
+        {/* ③ 今日やること */}
         <TodayAction action={result.todayAction} />
 
-        {/* ③ 行動特性 */}
+        {/* ④ 行動特性 */}
         <TraitTags labels={result.traitLabels} />
 
-        {/* ④ 無意識にできていること */}
+        {/* ⑤ 無意識にできていること */}
         <StrengthText text={result.strengthText} />
 
-        {/* ⑤ 働き方タイプ詳細 */}
+        {/* ⑥ 働き方タイプ詳細 */}
         <WorkStyleCard
           primary={result.primaryTypeDetail}
           notSuited={result.notSuitedTypeDetail}
         />
 
-        {/* ⑥ 副業ランキング */}
+        {/* ⑦ 副業ランキング */}
         <SideHustleRank
           ranked={result.rankedSideHustles}
           notRecommended={result.notRecommended}
           notRecommendedReason={result.notRecommendedReason}
         />
 
-        {/* ⑦ ロードマップ */}
+        {/* ⑧ 詰まりやすいポイント */}
+        {topSideHustle && (
+          <StumblingPoints points={topSideHustle.stumblingPoints} />
+        )}
+
+        {/* ⑨ AIプロンプト */}
+        {topSideHustle && (
+          <AiPromptCard prompt={topSideHustle.aiPrompt} />
+        )}
+
+        {/* ⑩ ロードマップ */}
         <Roadmap days={result.weekRoadmap} />
 
-        {/* ⑧ クロージングメッセージ */}
+        {/* ⑪ クロージングメッセージ */}
         <ClosingMessage />
 
         {/* アクションボタン */}
         <div className="flex flex-col gap-3 pt-4 pb-8">
+          <a
+            href="#mission"
+            className="w-full py-3.5 bg-emerald-700 text-white rounded-full text-center text-sm font-semibold"
+          >
+            10分ミッションを始める →
+          </a>
           <a
             href={`https://twitter.com/intent/tweet?text=${shareText}`}
             target="_blank"

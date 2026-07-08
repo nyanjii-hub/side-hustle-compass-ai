@@ -36,9 +36,14 @@ export function QuestionCard({ question, previousAnswer, onSelect, isLast }: Pro
 
   return (
     <div className="w-full max-w-lg">
-      <p className="text-lg font-semibold text-zinc-800 mb-5 leading-relaxed">
+      <p className="text-lg font-semibold text-zinc-800 mb-2 leading-relaxed">
         {question.text}
       </p>
+      {question.multiSelect && (
+        <p className="text-xs text-emerald-600 mb-4">
+          複数選択できます（もう一度タップで解除できます）
+        </p>
+      )}
       <div className="space-y-2.5">
         {question.options.map(option => (
           <OptionCard
@@ -46,6 +51,7 @@ export function QuestionCard({ question, previousAnswer, onSelect, isLast }: Pro
             option={option}
             selected={selected.has(option.id)}
             onClick={() => handleOptionClick(option.id)}
+            isMultiSelect={question.multiSelect}
           />
         ))}
       </div>

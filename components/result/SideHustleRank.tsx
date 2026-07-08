@@ -11,6 +11,15 @@ interface Props {
 
 const RANK_ICONS = ["🥇", "🥈", "🥉", "4位", "5位"];
 
+const RANK_ROLE_LABELS = ["最有力候補", "比較候補", "参考候補", "", ""];
+const RANK_ROLE_COLORS = [
+  "bg-amber-100 text-amber-700",
+  "bg-blue-50 text-blue-600",
+  "bg-zinc-100 text-zinc-500",
+  "",
+  "",
+];
+
 const BEGINNER_LABELS: Record<string, string> = {
   easy: "初心者向け ✓",
   medium: "中級者向け",
@@ -47,12 +56,8 @@ const AI_COMPAT_COLORS: Record<string, string> = {
   high: "text-indigo-700",
 };
 
-function scoreToStars(score: number): number {
-  if (score >= 50) return 5;
-  if (score >= 40) return 4;
-  if (score >= 30) return 3;
-  if (score >= 20) return 2;
-  return 1;
+function rankToStars(rank: number): number {
+  return Math.max(1, 5 - rank);
 }
 
 export function SideHustleRank({ ranked, notRecommended, notRecommendedReason }: Props) {
@@ -65,14 +70,23 @@ export function SideHustleRank({ ranked, notRecommended, notRecommendedReason }:
           const terms = termIds
             .map(id => glossary.find(t => t.id === id))
             .filter(t => t !== undefined);
-          const stars = scoreToStars(sh.score);
+          const stars = rankToStars(i);
+          const isTop = i === 0;
 
           return (
-            <div key={sh.id} className="bg-white rounded-xl p-4 border border-zinc-100">
+            <div
+              key={sh.id}
+              className={`bg-white rounded-xl p-4 border ${isTop ? "border-amber-300 shadow-sm" : "border-zinc-100"}`}
+            >
               {/* ヘッダー行 */}
               <div className="flex items-center gap-2 mb-2">
                 <span className="text-sm">{RANK_ICONS[i]}</span>
                 <span className="font-semibold text-zinc-800 text-sm">{sh.name}</span>
+                {RANK_ROLE_LABELS[i] && (
+                  <span className={`text-[10px] font-bold px-2 py-0.5 rounded-full ${RANK_ROLE_COLORS[i]}`}>
+                    {RANK_ROLE_LABELS[i]}
+                  </span>
+                )}
                 <span
                   className={`ml-auto text-[10px] font-medium px-2 py-0.5 rounded-full ${BEGINNER_COLORS[sh.beginnerFriendly]}`}
                 >
@@ -80,7 +94,7 @@ export function SideHustleRank({ ranked, notRecommended, notRecommendedReason }:
                 </span>
               </div>
 
-              {/* 適性度 */}
+              {/* 適性度（ランク連動） */}
               <div className="flex items-center gap-1 mb-2">
                 <span className="text-[10px] text-zinc-400 mr-0.5">適性度</span>
                 {Array.from({ length: 5 }).map((_, idx) => (
@@ -116,9 +130,14 @@ export function SideHustleRank({ ranked, notRecommended, notRecommendedReason }:
                 </div>
               </div>
 
-              <p className="text-xs text-zinc-400 mb-2">
-                月収目安（6ヶ月後）: {sh.income6months}
-              </p>
+              {/* 収益マイルストーン */}
+              <div className="text-[10px] text-zinc-400 mb-2 leading-relaxed">
+                {sh.incomeMilestones[0]}
+                <span className="mx-1 text-zinc-300">→</span>
+                {sh.incomeMilestones[1]}
+                <span className="mx-1 text-zinc-300">→</span>
+                {sh.incomeMilestones[2]}
+              </div>
 
               {/* 関連用語 */}
               {terms.length > 0 && (
