@@ -56,6 +56,7 @@ export interface WorkStyleType {
 export interface TenMinuteMission {
   title: string;
   steps: string[];
+  serviceId?: string;
 }
 
 export interface StumblingPoint {

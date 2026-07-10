@@ -30,6 +30,7 @@ export const sideHustles: SideHustle[] = [
         "「書けそう」か「難しそう」かを正直に判断する",
         "気になった案件のURLを1件だけメモしておく",
       ],
+      serviceId: "crowdworks",
     },
     stumblingPoints: [
       { worry: "実績がなくて応募できない", solution: "今日は応募しなくてOKです。案件を10件眺めて「相場・条件・テーマ」を把握するだけで充分な一歩です。実績は後から作れます。" },
@@ -74,6 +75,7 @@ export const sideHustles: SideHustle[] = [
         "「バグ報告書 書き方 例」でGoogle検索して1件見てみる",
         "やってみたい案件のURLをメモしておく",
       ],
+      serviceId: "crowdworks",
     },
     stumblingPoints: [
       { worry: "テスト知識がないと思われそう", solution: "案件の多くは「スマホ・PCで動作確認をするだけ」です。特別な知識より「細かいことに気づく性格」の方が重要です。" },
@@ -118,6 +120,7 @@ export const sideHustles: SideHustle[] = [
         "一番条件が良さそうな案件を1件選ぶ",
         "その案件の要件をすべて読む",
       ],
+      serviceId: "crowdworks",
     },
     stumblingPoints: [
       { worry: "ミスをしたらどうしよう", solution: "案件の要件をよく読んで、納品前に自分でダブルチェックすれば大丈夫です。最初は作業量が少ない案件から始めましょう。" },
@@ -162,6 +165,7 @@ export const sideHustles: SideHustle[] = [
         "「なぜここで申し込もうと思うか（思わないか）」を考える",
         "気づいたことを3行メモする",
       ],
+      serviceId: "studio",
     },
     stumblingPoints: [
       { worry: "デザインセンスがない", solution: "LPには「型」があります。ヒーロー画像→問題提起→解決策→証拠→行動促進の順に並べるだけで大半は完成します。センスより型の理解が先です。" },
@@ -206,6 +210,7 @@ export const sideHustles: SideHustle[] = [
         "「自分ならどう改善するか」を1つ考える",
         "その改善案を3行メモする",
       ],
+      serviceId: "google_maps_local",
     },
     stumblingPoints: [
       { worry: "コーディングができない", solution: "最初の案件はWordPressやSTUDIOのテンプレートで充分です。コーディングなしで案件を受けている制作者は多くいます。" },
@@ -250,6 +255,7 @@ export const sideHustles: SideHustle[] = [
         "「自分ならこんなアプリを作りたい」を1つ考える",
         "思いついたアイデアを1行メモする",
       ],
+      serviceId: "bubble",
     },
     stumblingPoints: [
       { worry: "ノーコードでどこまでできるか分からない", solution: "Bubbleは会員機能・決済・データベースまで作れます。まずチュートリアルのToDoアプリを完成させれば、その規模感が具体的に分かります。" },
@@ -294,6 +300,7 @@ export const sideHustles: SideHustle[] = [
         "「クライアントに使えるクオリティか」を評価する",
         "改善したい点があれば追加の指示を出してみる",
       ],
+      serviceId: "chatgpt",
     },
     stumblingPoints: [
       { worry: "AIをどう使えばいいか分からない", solution: "「私は〇〇です。〇〇をしてください」と入力するだけです。まず議事録1本を要約してみてください。それがそのまま仕事になります。" },
@@ -338,6 +345,7 @@ export const sideHustles: SideHustle[] = [
         "「改善したら集客できそうな点」を2〜3つ見つける",
         "見つけた改善点を3行メモする",
       ],
+      serviceId: "google_maps",
     },
     stumblingPoints: [
       { worry: "MEOの知識がゼロ", solution: "「Googleビジネスプロフィール 最適化 初心者」でYouTubeを検索してください。1本の動画で基本は理解できます。知識より行動が先です。" },
@@ -382,6 +390,7 @@ export const sideHustles: SideHustle[] = [
         "「自分が書けそうなテーマ」を1つ考える",
         "そのテーマでつけたいタイトルを3案メモする",
       ],
+      serviceId: "note",
     },
     stumblingPoints: [
       { worry: "何を書けばいいか分からない", solution: "「職場で20代の後輩に教えていること」がそのまま商品になります。あなたが当たり前に知っていることは、知らない人には価値があります。" },
@@ -426,6 +435,7 @@ export const sideHustles: SideHustle[] = [
         "「自分に作れそうなもの」を1つ選ぶ",
         "そのアイテムに似た商品の企画を3行でメモする",
       ],
+      serviceId: "booth",
     },
     stumblingPoints: [
       { worry: "作れるものが思いつかない", solution: "「職場で作った書類・チェックリスト・管理表」は商品になります。ExcelやNotionで整えるだけでデジタル商品になります。" },
@@ -470,6 +480,7 @@ export const sideHustles: SideHustle[] = [
         "「これを1,000円で売れるか」を評価する",
         "改善すべき点を3つメモする",
       ],
+      serviceId: "chatgpt",
     },
     stumblingPoints: [
       { worry: "プロンプトを作れるか分からない", solution: "ChatGPTに「〇〇に使えるプロンプトのテンプレートを作って」と入力するだけで原型が完成します。改善を重ねれば商品になります。" },
@@ -514,6 +525,7 @@ export const sideHustles: SideHustle[] = [
         "一番商品化しやすいものを1つ選ぶ",
         "その商品のタイトル案を3つメモする",
       ],
+      serviceId: "booth",
     },
     stumblingPoints: [
       { worry: "自分のテンプレートに価値があるか分からない", solution: "「職場で自分が作ったシートを同僚が欲しがった経験」があれば、それが商品です。使われた実績があれば価値は証明されています。" },
@@ -558,6 +570,7 @@ export const sideHustles: SideHustle[] = [
         "「自分が作れそうなジャンル」を1つ考える",
         "好きな音楽で参考にしたい曲を3つ選んでメモする",
       ],
+      serviceId: "youtube_bgm_search",
     },
     stumblingPoints: [
       { worry: "音楽の知識がない", solution: "GarageBand（Mac・iPhone無料）やBandlab（無料）は音楽知識なしで使えます。まず10秒のループを1つ作ってみてください。" },
@@ -602,6 +615,7 @@ export const sideHustles: SideHustle[] = [
         "「自分なら何を加えられるか」を1つ考える",
         "最初に作る動画のタイトル案を1つメモする",
       ],
+      serviceId: "youtube",
     },
     stumblingPoints: [
       { worry: "顔出しが嫌だ", solution: "顔出しは不要です。画面録画＋スライドだけで解説動画は作れます。実際に顔出しなしで登録者1万人以上のチャンネルは多数あります。" },
@@ -646,6 +660,7 @@ export const sideHustles: SideHustle[] = [
         "ラッコキーワード（無料ツール）で検索ボリュームを1つ確認してみる",
         "「書けそう」と思えたタイトルに印をつける",
       ],
+      serviceId: "rakko_keywords",
     },
     stumblingPoints: [
       { worry: "SEOが難しすぎる", solution: "最初の10記事はSEOを気にしなくてOKです。「自分が知りたかった情報を書く」だけで充分です。読む人がいれば後からSEOを学べます。" },
@@ -690,6 +705,7 @@ export const sideHustles: SideHustle[] = [
         "「自信を持って紹介できる案件」を1つ選ぶ",
         "その案件で紹介記事のタイトル候補を3つメモする",
       ],
+      serviceId: "a8net",
     },
     stumblingPoints: [
       { worry: "何を紹介したらいいか分からない", solution: "「自分が実際に使って良かったもの」から始めてください。使ったことのないものを紹介しても読者には伝わりません。" },
@@ -734,6 +750,7 @@ export const sideHustles: SideHustle[] = [
         "「自分が作れそうなツールやテンプレート」を考える",
         "企画案を3行メモする",
       ],
+      serviceId: "gumroad",
     },
     stumblingPoints: [
       { worry: "技術力が足りない", solution: "「ChatGPT APIをスプレッドシートから呼び出すシート」はプログラミングなしで作れます。まず動くものを1つ作れば次が見えてきます。" },
@@ -778,6 +795,7 @@ export const sideHustles: SideHustle[] = [
         "「GAS 自動化 入門」でYouTubeを検索して動画を1本見る",
         "「この仕組みを他の人にも売れるか」を考える",
       ],
+      serviceId: "n8n",
     },
     stumblingPoints: [
       { worry: "プログラミングを知らない", solution: "n8nやMakeはプログラミングなしで使えます。まずGoogleスプレッドシートのマクロ機能（GAS）から始めれば、多くのクライアントのニーズに対応できます。" },

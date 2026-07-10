@@ -30,10 +30,29 @@ export function rankSideHustles(
       const aversionHits = sh.aversionExcludes.filter(a => profile.aversionTags.has(a)).length;
       score -= aversionHits * AVERSION_PENALTY;
 
-      const matchedTag = sh.matchTags.find(t => (profile.tags[t as TagId] ?? 0) > 0);
-      const matchReason = matchedTag
-        ? `あなたの「${TAG_LABELS[matchedTag] ?? matchedTag}」が活きる副業です`
-        : "あなたの働き方タイプと相性があります";
+      const isTypeMatch = sh.primaryTypes.includes(primaryType);
+      const matchedTags = sh.matchTags
+        .filter(t => (profile.tags[t as TagId] ?? 0) > 0)
+        .sort((a, b) => (profile.tags[b as TagId] ?? 0) - (profile.tags[a as TagId] ?? 0))
+        .slice(0, 2);
+
+      let matchReason: string;
+      if (matchedTags.length >= 2) {
+        const l1 = TAG_LABELS[matchedTags[0]] ?? matchedTags[0];
+        const l2 = TAG_LABELS[matchedTags[1]] ?? matchedTags[1];
+        matchReason = isTypeMatch
+          ? `あなたの「${l1}」と「${l2}」を直接活かせる、相性の高い副業です`
+          : `あなたの「${l1}」と「${l2}」が特に活きる副業です`;
+      } else if (matchedTags.length === 1) {
+        const l1 = TAG_LABELS[matchedTags[0]] ?? matchedTags[0];
+        matchReason = isTypeMatch
+          ? `あなたのタイプと「${l1}」が組み合わさる副業です`
+          : `あなたの「${l1}」が活きる副業です`;
+      } else if (isTypeMatch) {
+        matchReason = "あなたの働き方タイプと高い相性があります";
+      } else {
+        matchReason = "あなたのプロフィールと相性があります";
+      }
 
       return { ...sh, score, matchReason };
     })

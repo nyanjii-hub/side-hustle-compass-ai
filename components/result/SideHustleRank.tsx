@@ -56,11 +56,22 @@ const AI_COMPAT_COLORS: Record<string, string> = {
   high: "text-indigo-700",
 };
 
-function rankToStars(rank: number): number {
-  return Math.max(1, 5 - rank);
+function computeStarsList(ranked: RankedSideHustle[]): number[] {
+  const top5 = ranked.slice(0, 5);
+  const scores = top5.map(sh => sh.score);
+  const maxScore = Math.max(...scores);
+  const minScore = Math.min(...scores);
+  if (maxScore === minScore) {
+    return top5.map((_, i) => Math.max(1, 5 - i));
+  }
+  return scores.map(score => {
+    const ratio = (score - minScore) / (maxScore - minScore);
+    return Math.max(1, Math.min(5, Math.round(ratio * 4) + 1));
+  });
 }
 
 export function SideHustleRank({ ranked, notRecommended, notRecommendedReason }: Props) {
+  const starsList = computeStarsList(ranked);
   return (
     <section>
       <h2 className="text-base font-bold text-zinc-800 mb-3">おすすめ副業ランキング</h2>
@@ -70,7 +81,7 @@ export function SideHustleRank({ ranked, notRecommended, notRecommendedReason }:
           const terms = termIds
             .map(id => glossary.find(t => t.id === id))
             .filter(t => t !== undefined);
-          const stars = rankToStars(i);
+          const stars = starsList[i];
           const isTop = i === 0;
 
           return (

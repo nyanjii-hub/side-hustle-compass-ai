@@ -2,8 +2,8 @@
 "use client";
 import { useState } from "react";
 import type { DiagnosisResult } from "@/lib/types";
+import { getService, getServiceUrl, hasAnyAffiliateLink } from "@/lib/external-services";
 import { TypeHeader } from "@/components/result/TypeHeader";
-import { TodayAction } from "@/components/result/TodayAction";
 import { TraitTags } from "@/components/result/TraitTags";
 import { StrengthText } from "@/components/result/StrengthText";
 import { WorkStyleCard } from "@/components/result/WorkStyleCard";
@@ -33,6 +33,9 @@ export default function ResultPage() {
   }
 
   const topSideHustle = result.rankedSideHustles[0];
+  const topService = topSideHustle?.tenMinuteMission.serviceId
+    ? getService(topSideHustle.tenMinuteMission.serviceId)
+    : undefined;
 
   const shareText = encodeURIComponent(
     `副業コンパスAIで診断した結果、私は「${result.primaryTypeDetail.name}」タイプでした！ #副業コンパスAI`
@@ -48,9 +51,6 @@ export default function ResultPage() {
         {topSideHustle && (
           <TenMinuteMission mission={topSideHustle.tenMinuteMission} />
         )}
-
-        {/* ③ 今日やること */}
-        <TodayAction action={result.todayAction} />
 
         {/* ④ 行動特性 */}
         <TraitTags labels={result.traitLabels} />
@@ -88,13 +88,24 @@ export default function ResultPage() {
         <ClosingMessage />
 
         {/* アクションボタン */}
-        <div className="flex flex-col gap-3 pt-4 pb-8">
-          <a
-            href="#mission"
-            className="w-full py-3.5 bg-emerald-700 text-white rounded-full text-center text-sm font-semibold"
-          >
-            10分ミッションを始める →
-          </a>
+        <div className="flex flex-col gap-3 pt-4 pb-4">
+          {topService ? (
+            <a
+              href={getServiceUrl(topService)}
+              target="_blank"
+              rel="noopener noreferrer"
+              className="w-full py-3.5 bg-emerald-700 text-white rounded-full text-center text-sm font-semibold block"
+            >
+              {topService.ctaLabel} →
+            </a>
+          ) : (
+            <a
+              href="#mission"
+              className="w-full py-3.5 bg-emerald-700 text-white rounded-full text-center text-sm font-semibold block"
+            >
+              今日の10分ミッションをもう一度見る ↑
+            </a>
+          )}
           <a
             href={`https://twitter.com/intent/tweet?text=${shareText}`}
             target="_blank"
@@ -110,6 +121,12 @@ export default function ResultPage() {
             もう一度診断する
           </a>
         </div>
+
+        {hasAnyAffiliateLink() && (
+          <div className="text-[10px] text-zinc-400 text-center px-2 pb-8 leading-relaxed">
+            当サイトでは一部の外部リンクにアフィリエイト広告を利用しています。広告の有無や報酬額によって、診断結果やランキングが変わることはありません。
+          </div>
+        )}
       </div>
     </main>
   );
