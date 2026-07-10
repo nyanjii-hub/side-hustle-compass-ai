@@ -204,7 +204,13 @@ npm run build
 
 ## スクリーンショット
 
-<!-- TODO: スクリーンショットを追加（トップページ・診断画面・結果画面・初心者ガイドモーダル） -->
+| トップページ | 診断画面 |
+|:---:|:---:|
+| <img src="docs/images/01_top.png" width="320" alt="トップページ"> | <img src="docs/images/02_diagnosis.png" width="320" alt="診断画面"> |
+
+| 結果画面 | 初心者ガイドモーダル |
+|:---:|:---:|
+| <img src="docs/images/03_result.png" width="320" alt="結果画面"> | <img src="docs/images/04_modal.png" width="320" alt="初心者ガイドモーダル"> |
 
 ---
 
