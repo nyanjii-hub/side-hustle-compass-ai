@@ -10,7 +10,7 @@ export function ClosingMessage() {
       <p className="text-zinc-700 text-sm font-medium mt-3 leading-relaxed">
         今回の診断結果を参考に、
         <br />
-        まずは今日やることから始めてみましょう。
+        まずは今日の10分ミッションから始めてみましょう。
       </p>
       <p className="text-zinc-400 text-xs mt-4">
         気になることは今すぐ行動してみてください。最初の一歩が一番大切です。

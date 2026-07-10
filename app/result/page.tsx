@@ -123,8 +123,9 @@ export default function ResultPage() {
         </div>
 
         {hasAnyAffiliateLink() && (
-          <div className="text-[10px] text-zinc-400 text-center px-2 pb-8 leading-relaxed">
-            当サイトでは一部の外部リンクにアフィリエイト広告を利用しています。広告の有無や報酬額によって、診断結果やランキングが変わることはありません。
+          <div className="text-[10px] text-zinc-400 text-center px-2 pb-8 leading-relaxed space-y-1">
+            <p>※一部リンクには広告（アフィリエイト）を含みます。</p>
+            <p>当サイトでは一部の外部リンクにアフィリエイト広告を利用する場合があります。広告の有無によって診断結果やおすすめ順位が変わることはありません。</p>
           </div>
         )}
       </div>
